@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>   
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=52.1658&longitude=20.9671&current_weather=true&windspeed_unit=kn&forecast_days=1"
+            
+            function api(url){
+                axios.get(url)
+                .then(function (response) {
+                    document.getElementById("temp").innerHTML = response.data.current_weather.temperature + " C";
+                    document.getElementById("wind_speed").innerHTML = response.data.current_weather.windspeed + " kts";
+                    document.getElementById("wind_dir").innerHTML = response.data.current_weather.winddirection + " deg";
+                    document.getElementById("time").innerHTML = response.data.current_weather.time;
+                })
+            }
+
+
+        </script>
+        <link rel="stylesheet" href="bootstrap.css">
+        <link rel="stylesheet" href="home.css">
+        <h1>EPWA metar</h1>
+        <body>
+            <div id="data_cat">
+                <div id="temp_head">Temp
+                    <div id="temp">--</div>
+                </div>
+
+                <div id="wind_speed_head">Wind
+                    <div id="wind_speed">--</div>
+                </div>
+
+                <div id="wind_dir_head">Direction
+                    <div id="wind_dir">--</div>
+                </div>
+
+                <div id="tiem_head">Time
+                    <div id="time">--</div>
+                </div>
+            </div>
+
+            
+            
+            <div id="update"><button type="button" onclick="api(url)">update</button></div>  
+            <div id="input"><input id="input_text" type="text"><button id="reset" type="button">reset</button></div>
+            <div id="apply"><button type="button" onclick="">apply</button></div>
+        </body>
+</html>
